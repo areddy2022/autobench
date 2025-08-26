@@ -16,7 +16,7 @@ A Rust CLI tool for automatically generating VHDL testbenches from entity files 
 cargo build --release
 ```
 
-The binary will be created as `target/release/autotest`.
+The binary will be created as `target/release/autobench`.
 
 ## Workflows
 
@@ -26,18 +26,18 @@ Perfect when you're starting a new VHDL design:
 
 ```bash
 # 1. Generate a VHDL entity template
-./autotest --generate-template my_processor
+./autobench --generate-template my_processor
 
 # 2. Edit my_processor.vhd to implement your design
 # (Add your ports, generics, and logic)
 
 # 3. Generate baseline configuration
-./autotest -i my_processor.vhd -g
+./autobench -i my_processor.vhd -g
 
 # 4. Edit my_processor_config.toml to add test vectors
 
 # 5. Generate the testbench
-./autotest -i my_processor.vhd -c my_processor_config.toml
+./autobench -i my_processor.vhd -c my_processor_config.toml
 ```
 
 ### 📄 Work with Existing VHDL
@@ -46,18 +46,18 @@ When you already have a VHDL file:
 
 ```bash
 # 1. Generate baseline configuration from existing VHDL
-./autotest -i stack.vhd -g
+./autobench -i stack.vhd -g
 
 # 2. Edit stack_config.toml to customize tests
 
 # 3. Generate testbench
-./autotest -i stack.vhd -c stack_config.toml
+./autobench -i stack.vhd -c stack_config.toml
 ```
 
 ## Command Line Options
 
 ```
-Usage: autotest [OPTIONS]
+Usage: autobench [OPTIONS]
 
 Options:
   -i, --input <FILE>                    Input VHDL file to parse
@@ -77,7 +77,7 @@ Options:
 
 ```bash
 # Create a new VHDL entity template
-./autotest --generate-template uart_controller -v
+./autobench --generate-template uart_controller -v
 
 # This creates uart_controller.vhd with proper structure
 ```
@@ -86,7 +86,7 @@ Options:
 
 ```bash
 # Generate config from existing VHDL file
-./autotest -i counter.vhd -g -v
+./autobench -i counter.vhd -g -v
 
 # Creates counter_config.toml with sensible defaults
 ```
@@ -95,14 +95,14 @@ Options:
 
 ```bash
 # Generate comprehensive testbench
-./autotest -i fifo.vhd -c fifo_config.toml -o fifo_testbench.vhd -v
+./autobench -i fifo.vhd -c fifo_config.toml -o fifo_testbench.vhd -v
 ```
 
 ### Custom Templates
 
 ```bash
 # Use custom testbench template
-./autotest -i processor.vhd -t ./templates/custom_tb.vhdl -c processor_config.toml
+./autobench -i processor.vhd -t ./templates/custom_tb.vhdl -c processor_config.toml
 ```
 
 ## Generated VHDL Template Structure
@@ -269,29 +269,3 @@ cargo test
 - `serde`: Configuration serialization
 - `toml`: Configuration file format
 - `clap`: Command line interface
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Add tests for new functionality
-4. Commit changes (`git commit -m 'Add amazing feature'`)
-5. Push to branch (`git push origin feature/amazing-feature`)
-6. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details.
-
-## Changelog
-
-### v1.1.0
-- ✨ Added VHDL template generation (`--generate-template`)
-- ✨ Added configuration auto-generation (`--generate-config`) 
-- 🔧 Enhanced CLI with better workflow guidance
-- 📚 Improved documentation and examples
-
-### v1.0.0
-- 🎉 Initial release with testbench generation
-- 📋 TOML configuration support
-- 🧪 Self-checking test vectors
