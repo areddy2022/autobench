@@ -20,6 +20,9 @@ architecture testbench of {component_name}_tb is
 --Component Declaration
 --=============================================================================
 component {component_name} is
+    Generic (
+    {generics}
+    );
     Port ( 
     {ports}
     );
