@@ -1,2 +1,3 @@
-Cargo.lock
-target/
+uv.lock
+tests/__pycache__/
+autobench/__pycache__/
